@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText edNama = (EditText) findViewById(R.id.edNama);
+        EditText edNamaDepan = (EditText) findViewById(R.id.edNamaDepan);
+        EditText edNamaBelakang = (EditText) findViewById(R.id.edNamaBelakang);
         Button btnSimpan = (Button) findViewById(R.id.btnSimpan);
 
         ArrayList<String> daftar_nama = new ArrayList<>();
@@ -28,14 +29,17 @@ public class MainActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String isian_nama = edNama.getText().toString();
+                String isian_nama_depan = edNamaDepan.getText().toString();
+                String isian_nama_belakang = edNamaBelakang.getText().toString();
 
-                if(isian_nama.isEmpty()){
+                if(isian_nama_depan.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Isian masih kosong", Toast.LENGTH_SHORT).show();
                 }else{
+                    String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang);
                     daftar_nama.clear();
-                    daftar_nama.add(isian_nama);
-                    edNama.setText("");
+                    daftar_nama.add(nama_lengkap);
+                    edNamaDepan.setText("");
+                    edNamaBelakang.setText("");
                     intent_list.putStringArrayListExtra("daftar_nama", daftar_nama);
                     startActivity(intent_list);
                 }
